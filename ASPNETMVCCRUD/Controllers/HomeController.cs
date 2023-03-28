@@ -17,6 +17,10 @@ namespace ASPNETMVCCRUD.Controllers
         {
             return View();
         }
+        //public IActionResult Add()
+        //{
+        //    return View();
+        //}
 
         public IActionResult Privacy()
         {

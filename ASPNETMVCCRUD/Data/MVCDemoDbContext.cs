@@ -11,3 +11,9 @@ namespace ASPNETMVCCRUD.Data
         public DbSet <Employee> Employees{ get; set; }
     }
 }
+
+
+//Update-Database
+//Add-Migration "Initial Migration"
+
+//connect with SQL and create tables
