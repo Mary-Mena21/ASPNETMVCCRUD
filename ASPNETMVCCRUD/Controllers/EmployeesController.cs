@@ -94,21 +94,34 @@ namespace ASPNETMVCCRUD.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(UpdateEmployeeViewModel updateEmployeeViewModel)
+        public async Task<IActionResult> Edit(UpdateEmployeeViewModel employeeModel)
         {
-            var employee = await mvcDemoDbContext.Employees.FindAsync(updateEmployeeViewModel.Id);
+            var employee = await mvcDemoDbContext.Employees.FindAsync(employeeModel.Id);
             if (employee != null) 
             {
-                employee.Id = updateEmployeeViewModel.Id;
-                employee.Name = updateEmployeeViewModel.Name;
-                employee.Email = updateEmployeeViewModel.Email;
-                employee.Salary = updateEmployeeViewModel.Salary;
-                employee.DateOfBirth = updateEmployeeViewModel.DateOfBirth;
-                employee.Department = updateEmployeeViewModel.Department;
+                employee.Id = employeeModel.Id;
+                employee.Name = employeeModel.Name;
+                employee.Email = employeeModel.Email;
+                employee.Salary = employeeModel.Salary;
+                employee.DateOfBirth = employeeModel.DateOfBirth;
+                employee.Department = employeeModel.Department;
             };
 
             //await mvcDemoDbContext.Employees.AddAsync(employee);
             await mvcDemoDbContext.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(UpdateEmployeeViewModel employeeModel)
+        {
+            var employee = await mvcDemoDbContext.Employees.FindAsync(employeeModel.Id);
+            if (employee != null)
+            {
+                mvcDemoDbContext.Employees.Remove(employee);
+                await mvcDemoDbContext.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
             return RedirectToAction("Index");
         }
 
