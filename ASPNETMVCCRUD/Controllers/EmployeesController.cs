@@ -73,11 +73,45 @@ namespace ASPNETMVCCRUD.Controllers
         //    return RedirectToAction("Add");
         //}
 
-        //[HttpGet]
-        //public ActionResult Edit(Guid id)
-        //{
-        //    return View();
-        //}
+        [HttpGet]
+        public async Task<ActionResult> Edit(Guid id)
+        {
+            var employee =await mvcDemoDbContext.Employees.FirstOrDefaultAsync(x=>x.Id == id);
+            if (employee != null)
+            {
+                var editModel = new UpdateEmployeeViewModel()
+                {
+                    Id = employee.Id,
+                    Name = employee.Name,
+                    Email = employee.Email,
+                    Salary = employee.Salary,
+                    DateOfBirth = employee.DateOfBirth,
+                    Department = employee.Department,
+                };
+                return View(editModel);
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(UpdateEmployeeViewModel updateEmployeeViewModel)
+        {
+            var employee = await mvcDemoDbContext.Employees.FindAsync(updateEmployeeViewModel.Id);
+            if (employee != null) 
+            {
+                employee.Id = updateEmployeeViewModel.Id;
+                employee.Name = updateEmployeeViewModel.Name;
+                employee.Email = updateEmployeeViewModel.Email;
+                employee.Salary = updateEmployeeViewModel.Salary;
+                employee.DateOfBirth = updateEmployeeViewModel.DateOfBirth;
+                employee.Department = updateEmployeeViewModel.Department;
+            };
+
+            //await mvcDemoDbContext.Employees.AddAsync(employee);
+            await mvcDemoDbContext.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
     }
 }
 //
