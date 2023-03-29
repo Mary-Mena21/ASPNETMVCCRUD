@@ -73,6 +73,11 @@ namespace ASPNETMVCCRUD.Controllers
         //    return RedirectToAction("Add");
         //}
 
+        //[HttpGet]
+        //public ActionResult Edit(Guid id)
+        //{
+        //    return View();
+        //}
     }
 }
 //
