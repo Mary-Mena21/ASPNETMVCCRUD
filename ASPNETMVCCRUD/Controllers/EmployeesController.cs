@@ -23,19 +23,13 @@ namespace ASPNETMVCCRUD.Controllers
             return View(Employee);
         }
 
-        //[HttpDelete]
-        //public async Task<ActionResult> Delete(string id)
-        //{
-        //    var id = await Id.ToListAsyinc();
-        //}
-
         [HttpGet]
         public IActionResult Add()
         {
             return View();
         }
 
-        /*--------------------With async-----------------------*/
+        /*------------------Add--With async-----------------------*/
         [HttpPost]
         public async Task<IActionResult> Add(AddEmployeeViewModel addEmployeeRequest)
         {
@@ -72,7 +66,7 @@ namespace ASPNETMVCCRUD.Controllers
         //    mvcDemoDbContext.SaveChanges();
         //    return RedirectToAction("Add");
         //}
-
+        /*-----------------------Edit---------------------------*/
         [HttpGet]
         public async Task<ActionResult> Edit(Guid id)
         {
@@ -112,7 +106,7 @@ namespace ASPNETMVCCRUD.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpDelete]
+        [HttpPost]
         public async Task<IActionResult> Delete(UpdateEmployeeViewModel employeeModel)
         {
             var employee = await mvcDemoDbContext.Employees.FindAsync(employeeModel.Id);
@@ -120,9 +114,10 @@ namespace ASPNETMVCCRUD.Controllers
             {
                 mvcDemoDbContext.Employees.Remove(employee);
                 await mvcDemoDbContext.SaveChangesAsync();
+
                 return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index");//Navigate to Index view
         }
 
     }
