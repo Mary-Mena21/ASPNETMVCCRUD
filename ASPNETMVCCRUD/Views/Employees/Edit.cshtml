@@ -1,11 +1,10 @@
-﻿
-@model ASPNETMVCCRUD.Models.UpdateEmployeeViewModel
+﻿@model ASPNETMVCCRUD.Models.UpdateEmployeeViewModel
 <h1>Update Employee</h1>
 <form method="post" action="Edit" class="mb-5">
     <div class="mb-3">
         <label for="Id" class="form-label">Id</label>
         <input type="text" class="form-control" asp-for="Id" readonly>
-    </div>    
+    </div>
     <div class="mb-3">
         <label for="Name" class="form-label">Name</label>
         <input type="text" class="form-control" asp-for="Name">
@@ -34,5 +33,16 @@
     <input type="checkbox" class="form-check-input" id="exampleCheck1">
     <label class="form-check-label" for="exampleCheck1">Check me out</label>
     </div>*@
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit"
+            class="btn btn-primary"
+            asp-action="Edit"
+            asp-controller="Employees">
+        Submit
+    </button>
+    <button type="submit"
+            class="btn btn-danger"
+            asp-action="Delete"
+            asp-controller="Employees">
+        Delete
+    </button>
 </form>
